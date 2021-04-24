@@ -1,0 +1,2 @@
+class GrowingZonesController < ApplicationController
+end

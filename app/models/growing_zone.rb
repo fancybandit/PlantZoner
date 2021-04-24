@@ -1,0 +1,2 @@
+class GrowingZone < ApplicationRecord
+end
