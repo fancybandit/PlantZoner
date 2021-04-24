@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  owner: one
+  growing_zone: one
+  plant: one
+  name: MyString
+
+two:
+  owner: two
+  growing_zone: two
+  plant: two
+  name: MyString

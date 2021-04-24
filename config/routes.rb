@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :gardens
   resources :plants
   resources :growing_zones
   resources :users
