@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+  get 'plants/:id/delete', to: 'plants#delete', as: 'delete_plant'
+
   resources :users do
     resources :gardens, only: [:new, :create, :index]
   end
