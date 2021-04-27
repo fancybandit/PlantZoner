@@ -1,0 +1,7 @@
+<h3><strong>Please allow the below pages an extended amount of time to retrieve plants from the database</strong></h3>
+
+<ul>
+<% @growing_zones.each do |g| %>
+    <li><%= link_to g.name, growing_zone_path(g) %></li>
+<% end %>
+</ul>
