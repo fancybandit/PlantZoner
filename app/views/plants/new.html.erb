@@ -1,0 +1,21 @@
+<%= form_with model: @plant do |f| %>
+    <%= f.label :name, 'Plant name:' %>
+    <%= f.text_field :name %><br>
+
+    <%= f.label :scientific_name, 'Scientific name:' %>
+    <%= f.text_field :scientific_name %><br>
+
+    <%= f.label :image_link, 'Image link:' %>
+    <%= f.text_area :image_link %><br><br><br>
+
+
+    <% @growing_zones.each do |zone| %>
+        <%= f.fields_for zone do |z| %>
+            <%= z.check_box :zone_id, {multiple: true, checked: false}, zone.zone_id, nil %>
+            <%= z.label :zone_id, zone.name %><br>
+        <% end %>
+    <% end %>
+
+
+    <%= f.submit %>
+<% end %>
