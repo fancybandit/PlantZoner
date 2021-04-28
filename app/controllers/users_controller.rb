@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     def show
         redirect_if_not_logged_in
         find_user
-        redirect_to '/' if !@user
+        redirect_to '/', flash: {error: "Unable to find the user you requested."} if !@user
     end
 
     def new
@@ -26,7 +26,11 @@ class UsersController < ApplicationController
     end
 
     def edit
+        redirect_if_not_logged_in
         find_user
+        if @user != current_user
+            redirect_to users_path, flash: {error: "You don't have permission to access this page!"}
+        end
     end
 
     def update

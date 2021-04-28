@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'plants/:id/delete', to: 'plants#delete', as: 'delete_plant'
 
-  resources :users do
+  resources :users, param: :slug do
     resources :gardens, only: [:new, :create, :index]
   end
   resources :gardens do
