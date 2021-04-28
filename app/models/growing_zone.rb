@@ -3,6 +3,9 @@ class GrowingZone < ApplicationRecord
     has_many :plants, through: :gardens
     has_many :owners, class_name: "User", through: :gardens
 
+    validates :name, presence: true
+    validates :zone_id, presence: true, numericality: {only_integer: true, greater_than: 0}
+
     def get_plants
         plants_hash = API.new.get_plants_data(self.zone_id)
         plants_hash.each do |p|
@@ -17,5 +20,5 @@ class GrowingZone < ApplicationRecord
         end
         self.plants
     end
-    
+
 end
