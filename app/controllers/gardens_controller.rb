@@ -2,7 +2,7 @@ class GardensController < ApplicationController
     before_action :redirect_if_not_logged_in
 
     def index
-        if params[:user_id]
+        if params[:user_slug]
             if find_owner
                 @gardens = @owner.gardens
             else
@@ -15,7 +15,7 @@ class GardensController < ApplicationController
     end
 
     def new
-        if params[:user_id]
+        if params[:user_slug]
             if find_owner
                 #verify is current_user before building a garden
                 @garden = @owner.gardens.build(garden_params)
@@ -38,7 +38,7 @@ class GardensController < ApplicationController
     end
 
     def find_owner
-        @owner = User.find_by(id: params[:user_id])
+        @owner = User.find_by_slug(params[:user_slug])
     end
 
 end

@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     def create
         user = User.find_by(username: session_params[:username])
         if user && user.authenticate(session_params[:password])
-            session[:user_id] = user.id
+            session[:user_slug] = user.slugify
             redirect_to user_path(user.slug)
         else
             if user

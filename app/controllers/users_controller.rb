@@ -17,8 +17,9 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
+        @user.slug = @user.slug
         if @user.save
-            session[:user_id] = @user.id
+            session[:user_slug] = @user.slug
             redirect_to user_path(@user)
         else
             flash[:error] = @user.errors.full_messages.first

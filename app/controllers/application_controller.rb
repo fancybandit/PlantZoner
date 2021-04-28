@@ -5,11 +5,11 @@ class ApplicationController < ActionController::Base
     private
 
     def current_user
-        @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+        @current_user ||= User.find_by_slug(session[:user_slug]) if session[:user_slug]
     end
 
     def logged_in?
-        !!session[:user_id]
+        !!session[:user_slug]
     end
 
     def redirect_if_not_logged_in
