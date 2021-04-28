@@ -4,4 +4,7 @@ class User < ApplicationRecord
     has_many :growing_zones, through: :gardens
 
     has_secure_password
+
+    include Slug
+    extend Slug
 end

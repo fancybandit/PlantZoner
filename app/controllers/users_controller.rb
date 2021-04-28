@@ -8,7 +8,8 @@ class UsersController < ApplicationController
 
     def new
         if logged_in?
-            redirect_to user_path(session[:user_id])
+            find_user
+            redirect_to user_path(@user)
         else
             @user = User.new
         end
@@ -43,17 +44,7 @@ class UsersController < ApplicationController
     end
 
     def find_user
-        @user = User.find_by(id: params[:id])
-    end
-
-    def slug
-        self.username.gsub(/[^0-9A-Za-z ]/, '').downcase.split(' ').join('-')
-    end
-    
-    def find_by_slug(slug)
-        self.all.detect do |obj|
-            obj.slug == slug
-        end
+        @user = User.find_by_slug(params[:slug])
     end
 
 end
