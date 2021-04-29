@@ -10,10 +10,6 @@ class User < ApplicationRecord
     validates :email, presence: :true, uniqueness: :true, format: {with: /\A(?<username>[^@\s]+)@((?<domain_name>[-a-z0-9]+)\.(?<domain>[a-z]{2,}))\z/i}
     validates :slug, presence: true
 
-    validates_with SlugValidator
-
     include Slug
     extend Slug
-
-    include ActiveModel::Validations
 end
