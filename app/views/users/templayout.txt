@@ -1,0 +1,12 @@
+<div>
+      <% if logged_in? %>
+        <%= link_to "Record a Plant", new_garden_path %> |
+        <%= link_to "All Gardens/Plants", gardens_path %> |
+        <%= link_to "Logout", logout_path, method: "delete" %>
+      <% else %>
+        <%= link_to "Sign Up", signup_path %> |
+        <%= link_to "Log In", login_path %>
+      <% end %>
+    </div>
+
+    <%= yield %>
