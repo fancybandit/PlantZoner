@@ -38,7 +38,7 @@
                 </li>
               <% else %>
                 <li class="nav-item">
-                  <a class="nav-link" href="/logout">Logout</a>
+                  <%= link_to "Logout", logout_path, method: 'delete', class: "nav-link" %>
                 </li>
               <% end %>
               <li class="nav-item dropdown">

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     def new
         if logged_in?
             find_user
-            redirect_to user_path(@user)
+            redirect_to user_path(@user.slug)
         else
             @user = User.new
         end
@@ -17,10 +17,10 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
-        @user.slug = @user.slug
+        @user.slug = @user.slugify
         if @user.save
             session[:user_slug] = @user.slug
-            redirect_to user_path(@user)
+            redirect_to user_path(@user.slug)
         else
             flash[:error] = @user.errors.full_messages.first
             render :new

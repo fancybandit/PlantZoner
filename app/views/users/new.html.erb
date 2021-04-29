@@ -2,7 +2,7 @@
 
 <%= form_for(@user, url: '/signup') do |f| %>
 
-    <%= render partial: 'form' %>
+    <%= render partial: 'form', locals: {f: f} %>
     <%= f.submit "Submit" %>
 
 <% end %>
