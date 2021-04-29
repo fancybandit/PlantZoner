@@ -1,7 +1,13 @@
 <div class="text-center">
     <h1 class="display-3">PlantZoner</h1>
     <p>A regional agricultural management system.</p>
-    <%= link_to "Sign Up", signup_path %>
-    or
-    <%= link_to "Log In", login_path %>
+    <% if logged_in? %>
+        <%= link_to "View Your Gardens", user_gardens_path(current_user.slug) %>
+        <%= link_to "Create A Garden", new_user_garden_path(current_user.slug) %>
+        <%= link_to "Record A Plant", new_plant_path %>
+    <% else %>
+        <%= link_to "Sign Up", signup_path %>
+        or
+        <%= link_to "Log In", login_path %>
+    <% end %>
 </div>
