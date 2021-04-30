@@ -15,20 +15,40 @@ class GardensController < ApplicationController
     end
 
     def new
-        if params[:user_slug]
-            if find_owner
-                #verify is current_user before building a garden
-                @garden = @owner.gardens.build(garden_params)
+        if find_owner
+            if @owner == current_user
+                @garden = @owner.gardens.build
             else
-                flash[:error] = "The specified user does not exist."
-                @garden = Garden.new
+                flash[:error] = "You don't have permission to edit another user's resource."
+                redirect_back(fallback_location: root_path)
             end
         else
-            @garden = Garden.new
+            flash[:error] = "The specified user does not exist."
+            redirect_back(fallback_location: root_path)
         end
     end
 
     def create
+    end
+
+    def edit
+        find_owner
+        if owner.nil?
+            flash[:error] = "The specified user does not exist."
+            redirect_back(fallback_location: root_path)
+        else
+            @garden = @owner.gardens.find_by(id: params[:id])
+            if @garden.nil?
+                flash[:error] = "The specified garden does not exist."
+                redirect_to user_garden_path(@owner)
+            end
+        end
+    end
+
+    def update
+        @garden = Garden.find_by(params[:id])
+        @garden.update(garden_params)
+        redirect_to user_garden_path(@garden.owner, @garden)
     end
 
     private

@@ -10,3 +10,5 @@
     </div>
 
     <%= yield %>
+
+f.hidden_field :owner_id if @garden.owner
