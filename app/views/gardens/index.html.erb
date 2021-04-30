@@ -1,3 +1,6 @@
 <h1>All Gardens</h1>
 <h3>Regions</h3>
 <hr>
+<% @gardens.each do |g| %>
+    <%= link_to g.name, user_garden_path(current_user, g) %>
+<% end %>

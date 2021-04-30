@@ -3,19 +3,4 @@
 <%= f.label :name, "Garden Name:" %>
 <%= f.text_field :name, required: true %>
 
-<!-- UNFINISHED FORM, TEMPORARY MESS -->
-
-
-<%= f.label :username %>
-<%= f.text_field :username, required: true %><br>
-
-<%= f.label :email %>
-<%= f.email_field :email, required: true %><br>
-
-<%= f.label :password %>
-<%= f.password_field :password, required: true %><br>
-
-t.integer "owner_id", null: false
-    t.integer "growing_zone_id", null: false
-    t.integer "plant_id", null: false
-    t.string "name"
+<%= f.collection_select :growing_zone_name, GrowingZone.all, :name, :name %>

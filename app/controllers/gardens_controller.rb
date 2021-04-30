@@ -29,6 +29,7 @@ class GardensController < ApplicationController
     end
 
     def create
+        Garden.create(garden_params)
     end
 
     def edit
@@ -54,7 +55,7 @@ class GardensController < ApplicationController
     private
 
     def garden_params
-        params.require(:garden).permit(:name, :owner_id, :plant_id, :growing_zone_id)
+        params.require(:garden).permit(:name, :owner_id, :plant_id, :growing_zone_id, :plant_name, :growing_zone_name)
     end
 
     def find_owner
