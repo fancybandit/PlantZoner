@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
     end
 
     def create
+        binding.pry
         user = User.find_by(username: session_params[:username])
         if user && user.authenticate(session_params[:password])
             session[:user_slug] = user.slugify
@@ -28,4 +29,9 @@ class SessionsController < ApplicationController
     def session_params
         params.require(:user).permit(:username, :password)
     end
+
+    def auth
+        request.env['omniauth.auth']
+    end
+
 end

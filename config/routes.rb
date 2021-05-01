@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+  get '/auth/github/callback', to: 'sessions#create'
+
   get 'plants/:id/delete', to: 'plants#delete', as: 'delete_plant'
 
   resources :users, param: :slug do

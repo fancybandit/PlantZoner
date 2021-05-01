@@ -10,6 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_04_24_212132) do
 
+  create_table "gardens", force: :cascade do |t|
+    t.integer "owner_id", null: false
+    t.integer "growing_zone_id", null: false
+    t.integer "plant_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["growing_zone_id"], name: "index_gardens_on_growing_zone_id"
+    t.index ["owner_id"], name: "index_gardens_on_owner_id"
+    t.index ["plant_id"], name: "index_gardens_on_plant_id"
+  end
+
+  create_table "growing_zones", force: :cascade do |t|
+    t.string "name"
+    t.integer "zone_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "plants", force: :cascade do |t|
+    t.string "name"
+    t.string "scientific_name"
+    t.text "image_link"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "gardens", "growing_zones", on_delete: :cascade
+  add_foreign_key "gardens", "plants", on_delete: :cascade
+  add_foreign_key "gardens", "users", column: "owner_id", on_delete: :cascade
 end
