@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
         redirect_to root_path if !logged_in?
     end
 
+    def garden_params
+        params.require(:garden).permit(:id, :name, :owner_id, :plant_id, :growing_zone_id, :plant_name, :growing_zone_name)
+    end
+
 end

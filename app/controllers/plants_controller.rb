@@ -10,15 +10,12 @@ class PlantsController < ApplicationController
     end
 
     def new
-        @plant = Plant.new
-        @growing_zones = GrowingZone.order(:name)
+        @garden = Garden.find_by(id: params[:garden_id])
+        @plants = @garden.growing_zone.get_plants
     end
 
     def create
-        plant = Plant.new(plant_params(:name, :scientific_name, :image_link))
-        if plant.save
-            associate_growing_zones_with_plant(plant)
-        end
+        binding.pry
         redirect_to plant_path(plant)
     end
 
@@ -65,5 +62,5 @@ class PlantsController < ApplicationController
     def plant_params(*args)
         params.require(:plant).permit(*args)
     end
-    
+
 end

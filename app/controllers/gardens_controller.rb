@@ -1,6 +1,10 @@
 class GardensController < ApplicationController
     before_action :redirect_if_not_logged_in
 
+    def show
+        find_garden
+    end
+
     def index
         if params[:user_slug]
             if find_owner
@@ -29,7 +33,22 @@ class GardensController < ApplicationController
     end
 
     def create
-        Garden.create(garden_params)
+        garden = Garden.find_by(id: garden_params[:id])
+        if garden
+            plant = Plant.find_by(name: garden_params[:plant_name])
+            garden.plant = plant
+            garden.save
+            redirect_to user_garden_path(current_user, garden)
+        else
+            garden = Garden.new(garden_params)
+            garden.plant_id = 1 # PLACEHOLDER ID
+            if garden.save
+                redirect_to new_garden_plant_path(garden)
+            else
+                flash[:error] = garden.errors.full_messages.first
+                redirect_back(fallback_location: root_path)
+            end
+        end
     end
 
     def edit
@@ -54,12 +73,12 @@ class GardensController < ApplicationController
 
     private
 
-    def garden_params
-        params.require(:garden).permit(:name, :owner_id, :plant_id, :growing_zone_id, :plant_name, :growing_zone_name)
-    end
-
     def find_owner
         @owner = User.find_by_slug(params[:user_slug])
+    end
+
+    def find_garden
+        @garden = Garden.find_by(params[:id])
     end
 
 end
