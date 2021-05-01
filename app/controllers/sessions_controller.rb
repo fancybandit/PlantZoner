@@ -9,18 +9,20 @@ class SessionsController < ApplicationController
     end
 
     def create
-        binding.pry
-        user = User.find_by(username: session_params[:username])
-        if user && user.authenticate(session_params[:password])
-            session[:user_slug] = user.slugify
-            redirect_to user_path(user.slug)
+        if auth
         else
-            if user
-                flash[:error] = "Invalid password."
+            user = User.find_by(username: session_params[:username])
+            if user && user.authenticate(session_params[:password])
+                session[:user_slug] = user.slugify
+                redirect_to user_path(user.slug)
             else
-                flash[:error] = "Invalid username and password."
+                if user
+                    flash[:error] = "Invalid password."
+                else
+                    flash[:error] = "Invalid username and password."
+                end
+                redirect_to login_path
             end
-            redirect_to login_path
         end
     end
 

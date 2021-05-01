@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_212132) do
     t.string "email"
     t.string "password_digest"
     t.string "slug"
+    t.integer "uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
