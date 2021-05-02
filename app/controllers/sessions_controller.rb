@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     def create
         if auth
             user = find_or_create_user_by_auth_uid(auth['uid'])
-            user.save
+            user.save if !user.id
             session[:user_slug] = user.slug
             redirect_to user_path(user.slug)
         else
