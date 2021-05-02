@@ -78,7 +78,7 @@ class GardensController < ApplicationController
     end
 
     def find_garden
-        @garden = Garden.find_by(params[:id])
+        @garden = Garden.find_by(id: params[:id])
     end
 
 end
