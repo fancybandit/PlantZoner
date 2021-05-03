@@ -9,6 +9,9 @@ class GardensController < ApplicationController
         if params[:user_slug]
             if find_owner
                 @gardens = @owner.gardens
+                @zones = @gardens.map do |g|
+                    g.growing_zone.zone_id
+                end.sort
             else
                 flash[:error] = "The specified user does not exist."
                 @gardens = Garden.all

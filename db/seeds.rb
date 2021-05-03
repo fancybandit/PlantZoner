@@ -30,3 +30,14 @@
     # end
 
 # end
+
+zone_ids = (1..13).to_a
+
+zone_ids.each do |zone_id|
+    growing_zone = GrowingZone.find_by(zone_id: zone_id)
+    if !growing_zone
+        name = "Hardiness Zone #{zone_id}"
+        growing_zone = GrowingZone.new(name: name, zone_id: zone_id)
+        growing_zone.save
+    end
+end
