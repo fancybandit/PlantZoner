@@ -38,10 +38,15 @@ class GardensController < ApplicationController
     def create
         garden = Garden.find_by(id: garden_params[:id])
         if garden
-            plant = Plant.find_by(name: garden_params[:plant_name])
-            garden.plant = plant
-            garden.save
-            redirect_to user_garden_path(current_user, garden)
+            plant = Plant.new(plant_params(:name, :scientific_name, :image_link))
+            if plant.save
+                garden.plant = plant
+                garden.save
+                redirect_to user_garden_path(current_user, garden)
+            else
+                flash[:error] = plant.errors.full_messages.first
+                redirect_back(fallback_location: root_path)
+            end
         else
             garden = Garden.new(garden_params)
             garden.plant_id = 1 # PLACEHOLDER ID

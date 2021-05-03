@@ -11,7 +11,7 @@ class PlantsController < ApplicationController
 
     def new
         @garden = Garden.find_by(id: params[:garden_id])
-        @plants = @garden.growing_zone.get_plants
+        # @plants = @garden.growing_zone.get_plants
     end
 
     def create
@@ -57,10 +57,6 @@ class PlantsController < ApplicationController
 
     def growing_zone_ids
         params.require(:plant).require(:growing_zone).require(:zone_id)
-    end
-
-    def plant_params(*args)
-        params.require(:plant).permit(*args)
     end
 
 end

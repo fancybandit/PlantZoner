@@ -41,3 +41,5 @@ zone_ids.each do |zone_id|
         growing_zone.save
     end
 end
+
+Plant.create(name: "EXAMPLE", scientific_name: "EXAMPLE EXAMPLE", image_link: "https://thumbs.dreamstime.com/z/growing-plant-3599470.jpg")

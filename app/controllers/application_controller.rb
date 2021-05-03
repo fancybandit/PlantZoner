@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
     end
 
     def garden_params
-        params.require(:garden).permit(:id, :name, :owner_id, :plant_id, :growing_zone_id, :plant_name, :growing_zone_name)
+        params.require(:garden).permit(:id, :name, :owner_id, :plant_id, :growing_zone_id, :growing_zone_name, plant: [:name, :scientific_name, :image_link])
+    end
+
+    def plant_params(*args)
+        params.require(:plant).permit(*args)
     end
 
 end
