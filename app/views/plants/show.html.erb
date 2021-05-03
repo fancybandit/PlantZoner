@@ -1,7 +1,8 @@
 <div class="float-left"><%= link_to "Edit Plant", edit_plant_path(@plant) %>&nbsp;&nbsp;&nbsp;</div>
 <div class="float-left"><%= link_to "Delete Plant", delete_plant_path(@plant) %></div><br>
 
-<h1><%= @plant.name %></h1>
+<h1><strong><%= @plant.name %></strong></h1>
+<hr>
 <h3>Scientific name: <%= @plant.scientific_name %></h3>
 
 
@@ -12,5 +13,5 @@
     <% end %>
 </ul><br>
 
-<h1>Plant image:</h1>
-<img src="<%= @plant.image_link %>">
+<h3 class="float-left">Image:&nbsp;</h3>
+<img src="<%= @plant.image_link %>" class="float-left w-50 img-thumbnail" alt="Responsive image">
