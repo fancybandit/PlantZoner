@@ -1,5 +1,8 @@
 <h1><%= @garden.name %></h1>
 <p>Owner: <%= @garden.owner.username %></p>
-<h3>Plant: <%= link_to @garden.plant.name, plant_path(@garden.plant) %></h3>
+<%= link_to "Edit Garden", edit_user_garden_path(@garden.owner, @garden) %><br><br>
 <h4>Zone: <%= link_to @garden.growing_zone.name, growing_zone_path(@garden.growing_zone) %></h4>
-<%= link_to "Edit Garden", edit_user_garden_path(@garden.owner, @garden) %>
+<h3>Plant: <%= @garden.plant.name %></h3>
+<h5>Scientific Name: <%= @garden.plant.scientific_name %></h5>
+<h5 class="float-left">Image:&nbsp;</h5>
+<img src="<%= @garden.plant.image_link %>" class="float-left w-50 img-thumbnail" alt="Responsive image">
