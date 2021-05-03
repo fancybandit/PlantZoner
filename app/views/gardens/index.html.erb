@@ -2,6 +2,13 @@
 <h3>Regions</h3>
 
 <hr>
-<% @gardens.each do |g| %>
-    <%= link_to g.name, user_garden_path(current_user, g) %>
+<% @zones.each do |z| %>
+<%= z %>
+<ul>
+    <% @gardens.each do |g| %>
+        <% if g.growing_zone.name == z %>
+            <li><%= link_to g.name, user_garden_path(current_user, g) %></li>
+        <% end %>
+    <% end %>
+</ul>
 <% end %>

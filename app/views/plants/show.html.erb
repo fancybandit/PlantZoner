@@ -1,13 +1,14 @@
-<h1>Plant name: <%= @plant.name %></h1>
+<div class="float-left"><%= link_to "Edit Plant", edit_plant_path(@plant) %>&nbsp;&nbsp;&nbsp;</div>
+<div class="float-left"><%= link_to "Delete Plant", delete_plant_path(@plant) %></div><br>
+
+<h1><%= @plant.name %></h1>
 <h3>Scientific name: <%= @plant.scientific_name %></h3>
 
-<div><%= link_to "Edit Plant", edit_plant_path(@plant) %></div>
-<div><%= link_to "Delete Plant", delete_plant_path(@plant) %></div>
 
 <h3>Growing zones:</h3>
 <ul>
     <% @growing_zones.each do |g| %>
-        <li><%= g.name %></li>
+        <li><%= link_to g.name, growing_zone_path(g) %></li>
     <% end %>
 </ul><br>
 

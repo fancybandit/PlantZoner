@@ -8,10 +8,10 @@ class GardensController < ApplicationController
     def index
         if params[:user_slug]
             if find_owner
-                @gardens = @owner.gardens
+                @gardens = @owner.gardens.sort_by {|g| g.name}
                 @zones = @gardens.map do |g|
-                    g.growing_zone.zone_id
-                end.sort
+                    g.growing_zone.name
+                end.uniq.sort_by {|x| x[/\d+/].to_i}
             else
                 flash[:error] = "The specified user does not exist."
                 @gardens = Garden.all

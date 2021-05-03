@@ -3,7 +3,7 @@ class PlantsController < ApplicationController
     def show
         @plant = Plant.find_by(id: params[:id])
         if @plant
-            @growing_zones = @plant.growing_zones.order(:name)
+            @growing_zones = @plant.growing_zones.order(:name).uniq.sort_by {|x| x.name[/\d+/].to_i}
         else
            redirect_to growing_zones_path
         end

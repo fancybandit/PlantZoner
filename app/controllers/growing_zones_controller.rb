@@ -7,7 +7,7 @@ class GrowingZonesController < ApplicationController
     def show
         @growing_zone = GrowingZone.find_by(id: params[:id])
         if @growing_zone
-            @plants = @growing_zone.get_plants.order(:name)
+            @plants = @growing_zone.plants.order(:name).uniq
         else
             redirect_to growing_zones_path
         end
