@@ -46,10 +46,10 @@
                   Resources
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/">View All Users</a>
-                  <a class="dropdown-item" href="/">Properties</a>
-                  <a class="dropdown-item" href="/">Buildings</a>
-                  <a class="dropdown-item" href="/">Deeds</a>
+                  <a class="dropdown-item" href="<%= growing_zones_path %>">All Hardiness Zones</a>
+                  <a class="dropdown-item" href="<%= user_gardens_path(current_user) %>">Your Gardens</a>
+                  <a class="dropdown-item" href="<%= new_user_garden_path(current_user) %>">New Garden</a>
+                  <a class="dropdown-item" href="<%= user_path(current_user) %>">Account</a>
                 </div>
               </li>
             </ul>
