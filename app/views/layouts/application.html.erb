@@ -40,18 +40,18 @@
                 <li class="nav-item">
                   <%= link_to "Logout", logout_path, method: 'delete', class: "nav-link" %>
                 </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Resources
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<%= growing_zones_path %>">All Hardiness Zones</a>
+                    <a class="dropdown-item" href="<%= user_gardens_path(current_user.slug) %>">Your Gardens</a>
+                    <a class="dropdown-item" href="<%= new_user_garden_path(current_user.slug) %>">New Garden</a>
+                    <a class="dropdown-item" href="<%= user_path(current_user.slug) %>">Account</a>
+                  </div>
+                </li>
               <% end %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Resources
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<%= growing_zones_path %>">All Hardiness Zones</a>
-                  <a class="dropdown-item" href="<%= user_gardens_path(current_user) %>">Your Gardens</a>
-                  <a class="dropdown-item" href="<%= new_user_garden_path(current_user) %>">New Garden</a>
-                  <a class="dropdown-item" href="<%= user_path(current_user) %>">Account</a>
-                </div>
-              </li>
             </ul>
           </div>
         </nav>
