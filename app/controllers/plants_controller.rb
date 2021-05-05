@@ -20,24 +20,27 @@ class PlantsController < ApplicationController
     end
 
     def edit
+        @garden = Garden.find_by(id: params[:garden_id])
         @plant = Plant.find_by(id: params[:id])
-        @growing_zones = GrowingZone.order(:name)
+        # @growing_zones = GrowingZone.order(:name)
     end
 
     def update
-        plant = Plant.find_by(id: params[:id])
-        plant.update(plant_params(:name, :scientific_name, :image_link))
-        if plant.save
-            plant.growing_zones.each do |zone|
-                included = growing_zone_ids.include?(zone.zone_id)
-                if !included
-                    zone.plants.delete(plant)
-                    plant.save
-                end
+        garden = Garden.find_by(id: params[:garden_id])
+        if garden.owner == current_user
+            plant = garden.plant
+            garden.update(garden_params)
+            plant.update(plant_params(:name, :scientific_name, :image_link))
+            if garden.save && plant.save
+                redirect_to user_garden_path(current_user, garden)
+            else
+                flash[:error] = "#{garden.errors.full_messages.first if garden.errors}#{plant.errors.full_messages.first if plant.errors}"
+                redirect_back(fallback_location: root_path)
             end
-            associate_growing_zones_with_plant(plant)
+        else
+            flash[:error] = "You don't have permission to edit another user's resource."
+            redirect_back(fallback_location: root_path)
         end
-        redirect_to plant_path(plant)
     end
 
     def delete

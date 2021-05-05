@@ -1,0 +1,12 @@
+<%= fields_for :plant, garden.build_plant do |plant_f| %>
+    <%= plant_f.label :name %>
+    <%= plant_f.text_field :name, required: true %>
+
+    <%= plant_f.label :scientific_name %>
+    <%= plant_f.text_field :scientific_name, required: true %>
+
+    <%= plant_f.label :image_link %>
+    <%= plant_f.text_field :image_link, required: true %>
+<% end %>
+
+<%= f.hidden_field :id %>

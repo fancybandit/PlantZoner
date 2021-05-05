@@ -1,0 +1,6 @@
+<h1>Edit Garden</h1>
+<hr>
+
+<%= form_for(@garden, url: user_garden_path(current_user.slug, @garden), method: :patch ) do |f| %>
+    <%= render partial: "form", locals: {f: f} %>
+<% end %>

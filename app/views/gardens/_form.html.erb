@@ -1,6 +1,11 @@
 <%= f.hidden_field :owner_id %>
 
 <%= f.label :name, "Garden Name:" %>
-<%= f.text_field :name, required: true %>
+<%= f.text_field :name, required: true %><br>
 
-<%= f.collection_select :growing_zone_name, GrowingZone.all, :name, :name %>
+<%= f.label :growing_zone_name, "Hardiness Zone:" %>
+<%= f.collection_select :growing_zone_name, GrowingZone.all, :name, :name, required: true %><br>
+    
+<%= f.submit "Step 2: Recording Plants" %><br>
+
+<small>Plant registration page may take a moment to retrieve the growing zone's plants.</small>

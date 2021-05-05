@@ -1,7 +1,6 @@
 <h1>New Garden</h1>
+<hr>
 
 <%= form_for(@garden) do |f| %>
     <%= render partial: "form", locals: {f: f} %>
-    <%= f.submit "Step 2: Recording Plants" %>
 <% end %>
-<small>Plant registration page may take a minute to retrieve the growing zone's plants.</small>

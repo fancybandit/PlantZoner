@@ -1,19 +1,5 @@
-<%= form_for @plant do |f| %>
-    <%= f.label "Plant name:" %>
-    <%= f.text_field :name %><br>
+<%= form_for(@garden, url: garden_plant_path(@garden, @garden.plant), method: :patch) do |f| %>
+    <%= render partial: "form", locals: {f: f, garden: @garden} %>
 
-    <%= f.label "Scientific name:" %>
-    <%= f.text_field :scientific_name %><br>
-
-    <%= f.label "Image link:" %>
-    <%= f.text_area :image_link %><br>
-
-    <% @growing_zones.each do |zone| %>
-        <%= f.fields_for zone do |z| %>
-            <%= z.check_box :zone_id, {multiple: true, checked: related?(zone)}, zone.zone_id, nil %>
-            <%= z.label :zone_id, zone.name %><br>
-        <% end %>
-    <% end %>
-
-    <%= f.submit %>
+    <%= f.submit "Update Garden" %>
 <% end %>

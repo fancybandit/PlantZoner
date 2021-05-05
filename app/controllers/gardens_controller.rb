@@ -61,22 +61,33 @@ class GardensController < ApplicationController
 
     def edit
         find_owner
-        if owner.nil?
-            flash[:error] = "The specified user does not exist."
-            redirect_back(fallback_location: root_path)
-        else
+        if @owner == current_user
             @garden = @owner.gardens.find_by(id: params[:id])
             if @garden.nil?
                 flash[:error] = "The specified garden does not exist."
-                redirect_to user_garden_path(@owner)
+                redirect_to user_gardens_path(@owner)
             end
+        else
+            flash[:error] = "The specified user does not exist."
+            redirect_back(fallback_location: root_path)
         end
     end
 
     def update
-        @garden = Garden.find_by(params[:id])
-        @garden.update(garden_params)
-        redirect_to user_garden_path(@garden.owner, @garden)
+        find_owner
+        if @owner == current_user
+            garden = Garden.find_by(id: params[:id])
+            garden.update(garden_params)
+            if garden.save
+                redirect_to edit_garden_plant_path(garden, garden.plant)
+            else
+                flash[:error] = garden.errors.full_messages.first
+                redirect_back(fallback_location: root_path)
+            end
+        else
+            flash[:error] = "You don't have permission to edit another user's resource."
+            redirect_back(fallback_location: root_path)
+        end
     end
 
     def delete
