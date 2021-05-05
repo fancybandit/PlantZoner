@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :gardens do
     resources :plants, only: [:index, :new, :create, :edit, :update]
   end
+  resources :growing_zones do
+    resources :gardens, only: [:index]
+  end
   resources :plants
-  resources :growing_zones
 end

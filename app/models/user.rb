@@ -12,6 +12,8 @@ class User < ApplicationRecord
     validates :email, presence: :true, uniqueness: :true, format: {with: /\A(?<username>[^@\s]+)@((?<domain_name>[-a-z0-9]+)\.(?<domain>[a-z]{2,}))\z/i}
     validates :slug, presence: true
 
+    scope :most_gardens, -> {where("")}
+
     include Slug
     extend Slug
 end

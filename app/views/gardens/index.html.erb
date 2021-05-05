@@ -1,13 +1,23 @@
-<h1><%= current_user.username %>'s Gardens</h1>
-
-<hr>
-<% @zones.each do |z| %>
-<%= z %>
-<ul>
-    <% @gardens.each do |g| %>
-        <% if g.growing_zone.name == z %>
+<% if @zone %>
+    <h1>Gardens In Hardiness Zone <%= @zone.zone_id %></h1>
+    <hr>
+    <%= @zone.name %>
+    <ul>
+        <% @gardens.each do |g| %>
             <li><%= link_to g.name, user_garden_path(current_user.slug, g) %></li>
         <% end %>
+    </ul>
+<% else %>
+    <h1><%= current_user.username %>'s Gardens</h1>
+    <hr>
+    <% @zones.each do |z| %>
+        <%= z %>
+        <ul>
+            <% @gardens.each do |g| %>
+                <% if g.growing_zone.name == z %>
+                    <li><%= link_to g.name, user_garden_path(current_user.slug, g) %></li>
+                <% end %>
+            <% end %>
+        </ul>
     <% end %>
-</ul>
 <% end %>

@@ -1,6 +1,7 @@
 <h1><strong><%= @growing_zone.name %></strong></h1>
 <hr>
-<h2>Plants:</h2>
+<small>View all <%= link_to "gardens", growing_zone_gardens_path(@growing_zone) %> in this area</small>
+<h2>Plants growing in this region:</h2>
 
 <ul>
     <% @plants.each do |p| %>

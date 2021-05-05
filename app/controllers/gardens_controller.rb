@@ -16,6 +16,14 @@ class GardensController < ApplicationController
                 flash[:error] = "The specified user does not exist."
                 @gardens = Garden.all
             end
+        elsif params[:growing_zone_id]
+            @zone = GrowingZone.find_by(id: params[:growing_zone_id])
+            if @zone
+                @gardens = @zone.gardens
+            else
+                flash[:error] = "The specified hardiness zone does not exist."
+                redirect_back(fallback_location: root_path)
+            end
         else
             @gardens = Garden.all
         end
