@@ -3,5 +3,5 @@
 <%= link_to "Edit Account", edit_user_path(@user.slug) %>
 <%= link_to "Delete Account", delete_user_path(@user.slug) %><br><br>
 
-<%= link_to "See all gardens", user_gardens_path(@user) %><br>
+<%= link_to "See all gardens", user_gardens_path(@user.slug) %><br>
 <%= link_to "Logout", logout_path, method: 'delete' %>

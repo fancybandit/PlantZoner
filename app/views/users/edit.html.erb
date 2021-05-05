@@ -1,6 +1,6 @@
 <h1>Edit Account</h1>
 
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, url: user_path(@user.slug)) do |f| %>
 
     <%= render partial: 'form', locals: {f: f} %>
     <%= f.submit "Update" %>

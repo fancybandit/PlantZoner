@@ -36,6 +36,19 @@ class UsersController < ApplicationController
     end
 
     def update
+        find_user
+        if @user == current_user
+            @user.update(user_params)
+            if @user.save
+                redirect_to user_path(@user.slug)
+            else
+                flash[:error] = @user.errors.full_messages.first
+                redirect_back(fallback_location: root_path)
+            end
+        else
+            flash[:error] = "You don't have permission to edit another user's account!"
+            redirect_back(fallback_location: root_path)
+        end
     end
 
     def delete
