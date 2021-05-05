@@ -1,6 +1,7 @@
 <h1><%= @garden.name %></h1>
-<p>Owner: <%= @garden.owner.username %></p>
-<%= link_to "Edit Garden", edit_user_garden_path(@garden.owner, @garden) %><br><br>
+<p>Owner: <%= link_to @garden.owner.username, user_path(@garden.owner.slug) %></p>
+<%= link_to "Edit Garden", edit_user_garden_path(@garden.owner, @garden) %>
+<%= link_to "Delete Garden", delete_user_garden_path(@garden.owner, @garden) %><br><br>
 <h4>Zone: <%= link_to @garden.growing_zone.name, growing_zone_path(@garden.growing_zone) %></h4>
 <h3>Plant: <%= @garden.plant.name %></h3>
 <h5>Scientific Name: <%= @garden.plant.scientific_name %></h5>
