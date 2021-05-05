@@ -51,6 +51,10 @@ class UsersController < ApplicationController
         end
     end
 
+    def scope
+        @users = User.github_affiliated
+    end
+
     private
 
     def user_params

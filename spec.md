@@ -39,8 +39,8 @@ Specs:
     - GrowingZone
     - Garden
 
-- [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
-    - 
+- [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
+    - User.github_affiliated URL: /users/github_affiliated
 
 - [x] Include signup
     - OmniAuth & Sessions

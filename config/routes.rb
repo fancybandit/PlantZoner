@@ -11,8 +11,11 @@ Rails.application.routes.draw do
 
   get '/auth/github/callback', to: 'sessions#create'
 
+  get 'users/github_affiliated', to: 'users#scope', as: 'user_scope'
   get 'users/:slug/delete', to: 'users#delete', as: 'delete_user'
+
   get 'plants/:id/delete', to: 'plants#delete', as: 'delete_plant'
+
   get 'users/:user_slug/gardens/:id/delete', to: 'gardens#delete', as: 'delete_user_garden'
 
   resources :users, param: :slug do 
