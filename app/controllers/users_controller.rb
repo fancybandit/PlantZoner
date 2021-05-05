@@ -38,6 +38,19 @@ class UsersController < ApplicationController
     def update
     end
 
+    def delete
+        find_user
+        if @user == current_user
+            session.clear
+            @user.destroy
+            flash[:error] = "Your account has been successfully deleted."
+            redirect_to root_path
+        else
+            flash[:error] = "You don't have permission to delete another user!"
+            redirect_back(fallback_location: root_path)
+        end
+    end
+
     private
 
     def user_params

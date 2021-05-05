@@ -2,8 +2,11 @@
     <h1 class="display-3">PlantZoner</h1>
     <p>A regional agricultural management system.</p>
     <% if logged_in? %>
-        <%= link_to "View Your Gardens", user_gardens_path(current_user.slug) %>
-        <%= link_to "New Garden", new_user_garden_path(current_user.slug) %>
+        <div>
+            <%= link_to "View Your Gardens", user_gardens_path(current_user.slug) %>
+            &nbsp;|&nbsp;
+            <%= link_to "New Garden", new_user_garden_path(current_user.slug) %>
+        </div>
     <% else %>
         <%= link_to "Sign Up", signup_path %>
         or
