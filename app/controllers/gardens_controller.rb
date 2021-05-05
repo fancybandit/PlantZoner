@@ -79,6 +79,18 @@ class GardensController < ApplicationController
         redirect_to user_garden_path(@garden.owner, @garden)
     end
 
+    def delete
+        find_owner
+        if @owner == current_user
+            garden = Garden.find_by(id: params[:id])
+            garden.destroy if garden
+            redirect_to user_gardens_path(current_user.slug)
+        else
+            flash[:error] = "You don't have permission to delete this user's resource"
+            redirect_back(fallback_location: root_path)
+        end
+    end
+
     private
 
     def find_owner

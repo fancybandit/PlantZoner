@@ -7,7 +7,7 @@
 <ul>
     <% @gardens.each do |g| %>
         <% if g.growing_zone.name == z %>
-            <li><%= link_to g.name, user_garden_path(current_user, g) %></li>
+            <li><%= link_to g.name, user_garden_path(current_user.slug, g) %></li>
         <% end %>
     <% end %>
 </ul>

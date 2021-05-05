@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: 'sessions#create'
 
   get 'plants/:id/delete', to: 'plants#delete', as: 'delete_plant'
-  get 'users/:slug/gardens/:id/delete', to: 'gardens#delete', as: 'delete_user_garden'
+  get 'users/:user_slug/gardens/:id/delete', to: 'gardens#delete', as: 'delete_user_garden'
 
   resources :users, param: :slug do
     resources :gardens, only: [:show, :index, :new, :create, :edit]
